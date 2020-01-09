@@ -3,12 +3,14 @@ import { MemberVm } from "./member.vm";
 import { SearchInput, MembersTableComponent } from "./components";
 
 interface Props {
+  userProfile: (userId: number) => void;
   organizationName: string;
   members: MemberVm[]
-  children: React.ReactNode
+
 }
 
-export const OrganizationComponent: React.FunctionComponent = (props: Props) => {
+export const OrganizationComponent = (props: Props) => {
+
   const [organization, setOrganization] = React.useState("lemoncode");
   const [members, setMembers] = React.useState<MemberVm[]>([]);
 
@@ -22,6 +24,10 @@ export const OrganizationComponent: React.FunctionComponent = (props: Props) => 
         onMemberChange={setMembers}
         members={members}
       />
-      <MembersTableComponent membersCollection={members} organizationName={organization} />
+      <MembersTableComponent
+        membersCollection={members}
+        organizationName={organization}
+        userProfile={props.userProfile}
+      />
     </>);
 };

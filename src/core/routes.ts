@@ -10,7 +10,7 @@ export const SwitchRoutes: ISwitchRoutes = {
   userProfile: "/userprofile/:id",
 };
 
-type NagivationFunction = (id: string) => string;
+type NagivationFunction = (id: number) => string;
 
 interface ILinkedRoutes extends Omit<ISwitchRoutes, "userProfile"> {
   userProfile: NagivationFunction;

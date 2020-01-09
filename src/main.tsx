@@ -16,7 +16,7 @@ ReactDOM.render(
     <HashRouter>
         <Switch>
             <Route exact={true} path={SwitchRoutes.root} component={OrganizationScene}></Route>
-            <Route exact={true} path={SwitchRoutes.root} component={UserProfileScene}></Route>
+            <Route exact={true} path={SwitchRoutes.userProfile} component={UserProfileScene}></Route>
         </Switch>
     </HashRouter>
     , root);

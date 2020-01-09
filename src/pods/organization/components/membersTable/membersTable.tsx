@@ -9,7 +9,8 @@ import { Card, CardContent, TablePagination, Paper, TableContainer, makeStyles, 
 
 interface Props {
   membersCollection: MemberVm[],
-  organizationName: string
+  organizationName: string,
+  userProfile: (userId: number) => void;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -65,7 +66,7 @@ export const MembersTableComponent = (props: Props) => {
                       <TableCell scope="row" className={classes.centered}>
                         <Avatar src={row.avatar_url} className={classes.avatar}></Avatar>
                       </TableCell>
-                      <TableCell align="left">{row.id}</TableCell>
+                      <TableCell align="left" onClick={() => props.userProfile(row.id)}>{row.id}</TableCell>
                       <TableCell align="left">{row.login}</TableCell>
                     </TableRow>
                   ))}
