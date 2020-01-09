@@ -1,5 +1,5 @@
 import * as React from "react";
-import { MemberEntity } from "../../model/member";
+import { MemberVm } from "../../member.vm";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { Card, CardContent, TablePagination, Paper, TableContainer, makeStyles, Avatar } from "@material-ui/core";
 
 interface Props {
-  membersCollection: MemberEntity[]
+  membersCollection: MemberVm[]
 }
 
 const useStyles = makeStyles(theme => ({

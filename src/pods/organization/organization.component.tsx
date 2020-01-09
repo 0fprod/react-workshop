@@ -1,17 +1,17 @@
 import * as React from "react";
-import { MembersTableComponent, SearchInput } from "./components";
-import { MemberEntity } from "./model/member";
 import { Card, CardContent } from "@material-ui/core";
+import { MemberVm } from "./member.vm";
+import { SearchInput, MembersTableComponent } from "./components";
 
 interface Props {
   organizationName: string;
-  members: MemberEntity[]
+  members: MemberVm[]
   children: React.ReactNode
 }
 
-export const App: React.FunctionComponent = (props: Props) => {
+export const OrganizationComponent: React.FunctionComponent = (props: Props) => {
   const [organization, setOrganization] = React.useState("lemoncode");
-  const [members, setMembers] = React.useState<MemberEntity[]>([]);
+  const [members, setMembers] = React.useState<MemberVm[]>([]);
 
   React.useEffect(() => { }, [members]);
 
@@ -27,6 +27,6 @@ export const App: React.FunctionComponent = (props: Props) => {
           />
         </CardContent>
       </Card>
-      <MembersTableComponent membersCollection={members} />
+      {/* <MembersTableComponent membersCollection={members} /> */}
     </>);
 };

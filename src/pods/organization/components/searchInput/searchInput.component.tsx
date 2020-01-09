@@ -1,6 +1,6 @@
 import React from 'react';
-import { MemberEntity } from '../../model/member';
-import { memberAPI } from '../../api/memberAPI';
+import { MemberVm } from '../../member.vm';
+import { memberAPI } from '../../member.api';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -8,9 +8,9 @@ import styled from 'styled-components';
 
 interface Props {
     organization: string;
-    members: MemberEntity[];
+    members: MemberVm[];
     onOrganizationChange: (organization: string) => void;
-    onMemberChange: (members: MemberEntity[]) => void;
+    onMemberChange: (members: MemberVm[]) => void;
 }
 
 const Section = styled.section`

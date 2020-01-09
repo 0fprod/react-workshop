@@ -1,9 +1,9 @@
-import {MemberEntity, createDefaultMemberEntity } from '../model/member';
+import {MemberVm, createDefaultMemberVm } from './member.vm';
 
 class MemberAPI {
 
   // Just return a copy of the mock data
-  getAllMembers(organizationName : string) : Promise<MemberEntity[]> {
+  getAllMembers(organizationName : string) : Promise<MemberVm[]> {
     const gitHubMembersUrl : string = `https://api.github.com/orgs/${organizationName}/members`;
 
     return fetch(gitHubMembersUrl)
@@ -25,10 +25,10 @@ class MemberAPI {
     return response.json();
   }
 
-  private resolveMembers (data : any) : Promise<MemberEntity[]> {
+  private resolveMembers (data : any) : Promise<MemberVm[]> {
 
     const members = data.map((gitHubMember) => {
-      var member : MemberEntity = createDefaultMemberEntity();
+      var member : MemberVm = createDefaultMemberVm();
 
       member.id = gitHubMember.id;
       member.login = gitHubMember.login;
