@@ -3,16 +3,14 @@ import * as ReactDOM from 'react-dom';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { SwitchRoutes } from './core';
 import { OrganizationScene, UserProfileScene } from './scenes';
+import { rootCss, bodyCss } from './masterStyles';
 
 // reset styles
 let body = document.getElementsByTagName('body')[0];
-const resetCss = {
-    margin: 0,
-    padding: 0,
-    fontFamily: 'Roboto'    
-}
-Object.assign(body.style, resetCss);
+let root = document.getElementById('root');
 
+Object.assign(body.style, bodyCss);
+Object.assign(root.style, rootCss);
 
 ReactDOM.render(
     <HashRouter>
@@ -21,4 +19,4 @@ ReactDOM.render(
             <Route exact={true} path={SwitchRoutes.root} component={UserProfileScene}></Route>
         </Switch>
     </HashRouter>
-    , document.getElementById('root'));
+    , root);

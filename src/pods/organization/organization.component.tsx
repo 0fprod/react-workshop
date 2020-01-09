@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Card, CardContent } from "@material-ui/core";
 import { MemberVm } from "./member.vm";
 import { SearchInput, MembersTableComponent } from "./components";
 
@@ -17,16 +16,12 @@ export const OrganizationComponent: React.FunctionComponent = (props: Props) => 
 
   return (
     <>
-      <Card>
-        <CardContent>
-          <SearchInput
-            organization={organization}
-            onOrganizationChange={setOrganization}
-            onMemberChange={setMembers}
-            members={members}
-          />
-        </CardContent>
-      </Card>
-      {/* <MembersTableComponent membersCollection={members} /> */}
+      <SearchInput
+        organization={organization}
+        onOrganizationChange={setOrganization}
+        onMemberChange={setMembers}
+        members={members}
+      />
+      <MembersTableComponent membersCollection={members} organizationName={organization} />
     </>);
 };

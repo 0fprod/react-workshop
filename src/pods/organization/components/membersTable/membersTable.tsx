@@ -5,25 +5,19 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Card, CardContent, TablePagination, Paper, TableContainer, makeStyles, Avatar } from "@material-ui/core";
+import { Card, CardContent, TablePagination, Paper, TableContainer, makeStyles, Avatar, CardHeader } from "@material-ui/core";
 
 interface Props {
-  membersCollection: MemberVm[]
+  membersCollection: MemberVm[],
+  organizationName: string
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    fontFamily: 'Roboto',
+    width: '100%'
   },
   container: {
-    maxHeight: 440,
-  },
-  title: {
-    fontSize: '1.5rem',
-    width: '100%',
-    textAlign: 'center',
-    margin: '1%'
+    maxHeight: '40vh',
   },
   avatar: {
     width: theme.spacing(7),
@@ -53,8 +47,8 @@ export const MembersTableComponent = (props: Props) => {
   return (
     <>
       <Card className={classes.root}>
+        <CardHeader title={`Members of ${props.organizationName}`}></CardHeader>
         <CardContent>
-          <div className={classes.title}>Organization's members</div>
           <Paper>
             <TableContainer className={classes.container}>
               <Table stickyHeader>
@@ -92,7 +86,6 @@ export const MembersTableComponent = (props: Props) => {
 
         </CardContent>
       </Card>
-
     </>
   );
 };
