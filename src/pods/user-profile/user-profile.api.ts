@@ -1,14 +1,13 @@
 import { UserProfileVm, createDefaultUserProfileVm } from "./user-profile.vm";
 
 class UserProfileAPI {
-
   geUserProfile(userId: number): Promise<UserProfileVm> {
     const gitHubMembersUrl: string = `https://api.github.com/user/${userId}`;
 
     return fetch(gitHubMembersUrl)
-      .then((response) => this.checkStatus(response))
-      .then((response) => this.parseJSON(response))
-      .then((data) => this.resolveUser(data))
+      .then(response => this.checkStatus(response))
+      .then(response => this.parseJSON(response))
+      .then(data => this.resolveUser(data));
   }
 
   private checkStatus(response: Response): Promise<Response> {
@@ -25,11 +24,18 @@ class UserProfileAPI {
   }
 
   private resolveUser(data: any): Promise<UserProfileVm> {
+    const user: UserProfileVm = createDefaultUserProfileVm();
 
-    const user = createDefaultUserProfileVm();
-    Object.assign(user, data)
-    
-    return Promise.resolve(user);
+    const keysOfUserProfileVm = Object.keys(user);
+
+    // map only the keys that belong to our viewModel
+    const mappedUser = keysOfUserProfileVm.reduce((accumulatedObject, currentProperty) => {
+      accumulatedObject[currentProperty] = data[currentProperty];
+      return accumulatedObject;
+    }, {});
+
+
+    return Promise.resolve(mappedUser as UserProfileVm);
   }
 }
 

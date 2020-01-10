@@ -9,7 +9,6 @@ export const MockedUser: UserProfileVm = {
     blog: "http://franjpr.github.io",
     location: "Tenerife, Spain",
     email: null,
-    hireable: true,
     bio: "Simple is beautiful",
     public_repos: 21,
     public_gists: 1,

@@ -5,7 +5,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Card, CardContent, TablePagination, Paper, TableContainer, makeStyles, Avatar, CardHeader } from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import TablePagination from '@material-ui/core/TablePagination';
+import Paper from '@material-ui/core/Paper';
+import TableContainer from '@material-ui/core/TableContainer';
+import Avatar from '@material-ui/core/Avatar';
+import CardHeader from '@material-ui/core/CardHeader';
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,6 +28,9 @@ const useStyles = makeStyles(theme => ({
   centered: {
     display: 'flex',
     justifyContent: 'center'
+  },
+  clickable: {
+    cursor: 'pointer'
   }
 }));
 
@@ -62,11 +72,11 @@ export const MembersTableComponent = (props: Props) => {
                 </TableHead>
                 <TableBody>
                   {props.members.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
-                    <TableRow key={row.id}>
+                    <TableRow key={row.id} onClick={() => props.onClickUserProfile(row.id)} className={classes.clickable}>
                       <TableCell scope="row" className={classes.centered}>
                         <Avatar src={row.avatar_url} className={classes.avatar}></Avatar>
                       </TableCell>
-                      <TableCell align="left" onClick={() => props.onClickUserProfile(row.id)}>{row.id}</TableCell>
+                      <TableCell align="left">{row.id}</TableCell>
                       <TableCell align="left">{row.login}</TableCell>
                     </TableRow>
                   ))}

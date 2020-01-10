@@ -11,18 +11,19 @@ interface Props {
 }
 
 export const OrganizationComponent = (props: Props) => {
-  
+  const { organization, setOrganization, loadMembers, members, onClickUserProfile } = props;
+
   return (
     <>
       <SearchInput
-        organization={props.organization}
-        setOrganization={props.setOrganization}
-        loadMembers={props.loadMembers}
+        organization={organization}
+        setOrganization={setOrganization}
+        loadMembers={loadMembers}
       />
       <MembersTableComponent
-        members={props.members}
-        organization={props.organization}
-        onClickUserProfile={props.onClickUserProfile}
+        members={members}
+        organization={organization}
+        onClickUserProfile={onClickUserProfile}
       />
     </>);
 };

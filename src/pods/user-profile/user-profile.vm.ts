@@ -8,7 +8,6 @@ export interface UserProfileVm {
   location: string; // "San Francisco",
   email: string; // "octocat@github.com",
   bio: string; // "There once was...",
-  hireable: boolean;
   public_repos: number;
   public_gists: number;
   followers: number;
@@ -25,7 +24,6 @@ export const createDefaultUserProfileVm = (): UserProfileVm => ({
   location: '',
   email: '',
   bio: '',
-  hireable: false,
   public_repos: 0,
   public_gists: 0,
   followers: 0,
