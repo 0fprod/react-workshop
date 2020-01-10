@@ -7,12 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Card, CardContent, TablePagination, Paper, TableContainer, makeStyles, Avatar, CardHeader } from "@material-ui/core";
 
-interface Props {
-  membersCollection: MemberVm[],
-  organizationName: string,
-  userProfile: (userId: number) => void;
-}
-
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
@@ -29,6 +23,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   }
 }));
+
+interface Props {
+  onClickUserProfile: (userId: number) => void;
+  organization: string;
+  members: MemberVm[]
+}
 
 export const MembersTableComponent = (props: Props) => {
   const classes = useStyles({});
@@ -48,7 +48,7 @@ export const MembersTableComponent = (props: Props) => {
   return (
     <>
       <Card className={classes.root}>
-        <CardHeader title={`Members of ${props.organizationName}`}></CardHeader>
+        <CardHeader title={`Members of ${props.organization}`}></CardHeader>
         <CardContent>
           <Paper>
             <TableContainer className={classes.container}>
@@ -61,12 +61,12 @@ export const MembersTableComponent = (props: Props) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {props.membersCollection.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
+                  {props.members.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
                     <TableRow key={row.id}>
                       <TableCell scope="row" className={classes.centered}>
                         <Avatar src={row.avatar_url} className={classes.avatar}></Avatar>
                       </TableCell>
-                      <TableCell align="left" onClick={() => props.userProfile(row.id)}>{row.id}</TableCell>
+                      <TableCell align="left" onClick={() => props.onClickUserProfile(row.id)}>{row.id}</TableCell>
                       <TableCell align="left">{row.login}</TableCell>
                     </TableRow>
                   ))}
@@ -77,7 +77,7 @@ export const MembersTableComponent = (props: Props) => {
             <TablePagination
               rowsPerPageOptions={[5, 10]}
               component="div"
-              count={props.membersCollection.length}
+              count={props.members.length}
               rowsPerPage={rowsPerPage}
               page={page}
               onChangePage={handleChangePage}

@@ -3,31 +3,26 @@ import { MemberVm } from "./member.vm";
 import { SearchInput, MembersTableComponent } from "./components";
 
 interface Props {
-  userProfile: (userId: number) => void;
-  organizationName: string;
+  onClickUserProfile: (userId: number) => void;
+  organization: string;
+  setOrganization: (name: string) => void;
   members: MemberVm[]
-
+  loadMembers: (organizationName: string) => void;
 }
 
 export const OrganizationComponent = (props: Props) => {
-
-  const [organization, setOrganization] = React.useState("lemoncode");
-  const [members, setMembers] = React.useState<MemberVm[]>([]);
-
-  React.useEffect(() => { }, [members]);
-
+  
   return (
     <>
       <SearchInput
-        organization={organization}
-        onOrganizationChange={setOrganization}
-        onMemberChange={setMembers}
-        members={members}
+        organization={props.organization}
+        setOrganization={props.setOrganization}
+        loadMembers={props.loadMembers}
       />
       <MembersTableComponent
-        membersCollection={members}
-        organizationName={organization}
-        userProfile={props.userProfile}
+        members={props.members}
+        organization={props.organization}
+        onClickUserProfile={props.onClickUserProfile}
       />
     </>);
 };

@@ -10,9 +10,8 @@ import { CardHeader, CardContent, CardActions } from '@material-ui/core';
 
 interface Props {
     organization: string;
-    members: MemberVm[];
-    onOrganizationChange: (organization: string) => void;
-    onMemberChange: (members: MemberVm[]) => void;
+    setOrganization: (name: string) => void;
+    loadMembers: (organizationName: string) => void;
 }
 
 const Section = styled.section`
@@ -21,14 +20,7 @@ const Section = styled.section`
 `;
 
 export const SearchInput = (props: Props) => {
-
-    const loadMembers = (organization: string) => {
-        memberAPI.getAllMembers(organization).then(members => props.onMemberChange(members));
-    };
-
-    React.useEffect(() => {
-        loadMembers(props.organization);
-    }, [])
+    const [input, setInput] = React.useState("");
 
     return (
         <Section>
@@ -37,12 +29,15 @@ export const SearchInput = (props: Props) => {
                 </CardHeader>
                 <CardContent>
                     <InputLabel>Organization name:</InputLabel>
-                    <Input type='text' onChange={e => props.onOrganizationChange(e.target.value)} />
+                    <Input type='text' onChange={e => setInput(e.target.value) } />
                 </CardContent>
                 <CardActions>
                     <Button variant="contained"
                         color="primary"
-                        onClick={e => { loadMembers(props.organization) }}> Search!</Button>
+                        onClick={e => { 
+                            props.setOrganization(input);
+                            props.loadMembers(props.organization);
+                        }}> Search!</Button>
                 </CardActions>
             </Card>
             
