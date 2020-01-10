@@ -1,34 +1,11 @@
-import {MemberVm, createDefaultMemberVm } from './member.vm';
+import { MemberVm, createDefaultMemberVm } from "./member.vm";
+import { PARAMETER_FLAG, BaseAPI } from "../../core";
 
-class MemberAPI {
+class MemberAPI extends BaseAPI<MemberVm[]> {
 
-  // Just return a copy of the mock data
-  getAllMembers(organizationName : string) : Promise<MemberVm[]> {
-    const gitHubMembersUrl : string = `https://api.github.com/orgs/${organizationName}/members`;
-
-    return fetch(gitHubMembersUrl)
-    .then((response) => this.checkStatus(response))
-    .then((response) => this.parseJSON(response))
-    .then((data) => this.resolveMembers(data))
-    }
-
-  private checkStatus(response : Response) : Promise<Response> {
-    if (response.status >= 200 && response.status < 300) {
-      return Promise.resolve(response);
-    } else {
-      let error = new Error(response.statusText);
-      throw error;
-    }
-  }
-
-  private parseJSON(response : Response) : any {
-    return response.json();
-  }
-
-  private resolveMembers (data : any) : Promise<MemberVm[]> {
-
-    const members = data.map((gitHubMember) => {
-      var member : MemberVm = createDefaultMemberVm();
+  dataMapper(data: any): Promise<MemberVm[]> {
+    const members = data.map(gitHubMember => {
+      var member: MemberVm = createDefaultMemberVm();
 
       member.id = gitHubMember.id;
       member.login = gitHubMember.login;
@@ -37,9 +14,9 @@ class MemberAPI {
       return member;
     });
 
-
     return Promise.resolve(members);
   }
 }
 
-export const memberAPI = new MemberAPI();
+const gitHubMembersUrl: string = `https://api.github.com/orgs/${PARAMETER_FLAG}/members`;
+export const memberAPI = new MemberAPI(gitHubMembersUrl);

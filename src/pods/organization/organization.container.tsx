@@ -18,7 +18,7 @@ const OrganizationContainerInner = (props: Props) => {
     }
 
     const loadMembers = (organization: string) => {
-        memberAPI.getAllMembers(organization).then(members => setMembers(members));
+        memberAPI.fetchData(organization).then(members => setMembers(members));
     };
 
     React.useEffect(() => {

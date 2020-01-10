@@ -17,7 +17,8 @@ const UserProfileContainerInner = (props: Props) => {
     }
 
     const loadUser = (userId: number) => {
-        userProfileAPI.geUserProfile(userId).then((res) => setUser(res));
+        userProfileAPI.fetchData(userId).then((res) => setUser(res));
+        // userProfileAPI.geUserProfile(userId).then((res) => setUser(res));
     }
 
     React.useEffect(() => {
