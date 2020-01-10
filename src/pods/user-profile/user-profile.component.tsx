@@ -1,16 +1,17 @@
 import * as React from "react";
 import { UserCardComponent } from "./components";
+import { UserProfileVm } from "./user-profile.vm";
 
 interface Props {
-    organizationName: string;
-
-    children: React.ReactNode
+    user: UserProfileVm,
+    navigateTo: () => void;
 }
 
-export const UserProfileComponent: React.FunctionComponent = (props: Props) => {
+export const UserProfileComponent = (props: Props) => {
+    const { user, navigateTo } = props;
 
     return (
         <>
-            <UserCardComponent></UserCardComponent>
+            <UserCardComponent user={user} navigateTo={navigateTo}></UserCardComponent>
         </>);
 };

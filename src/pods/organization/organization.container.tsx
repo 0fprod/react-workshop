@@ -22,8 +22,7 @@ const OrganizationContainerInner = (props: Props) => {
     };
 
     React.useEffect(() => {
-        // loadMembers(organization);
-        console.log("Being called")
+        loadMembers(organization);
     },[]);    
 
 

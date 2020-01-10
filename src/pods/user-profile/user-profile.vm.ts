@@ -3,9 +3,6 @@ export interface UserProfileVm {
   id: number;
   avatar_url: string; // "https://github.com/images/error/octocat_happy.gif",
   url: string; // "https://api.github.com/users/octocat",
-  starred_url: string; // "https://api.github.com/users/octocat/starred{/owner}{/repo}",
-  organizations_url: string; // "https://api.github.com/users/octocat/orgs",
-  repos_url: string; // "https://api.github.com/users/octocat/repos",
   name: string; // "monalisa octocat",
   blog: string; // "https://github.com/blog",
   location: string; // "San Francisco",
@@ -18,4 +15,20 @@ export interface UserProfileVm {
   following: number;
 }
 
-// https://api.github.com/users/octocat
+export const createDefaultUserProfileVm = (): UserProfileVm => ({
+  login: '',
+  id: -1,
+  avatar_url: '',
+  url: '',
+  name: '',
+  blog: '',
+  location: '',
+  email: '',
+  bio: '',
+  hireable: false,
+  public_repos: 0,
+  public_gists: 0,
+  followers: 0,
+  following: 0
+})
+

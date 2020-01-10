@@ -1,12 +1,30 @@
 import * as React from "react";
 import { UserProfileComponent } from "./user-profile.component";
+import { createDefaultUserProfileVm } from "./user-profile.vm";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { userProfileAPI } from "./user-profile.api";
+import { SwitchRoutes } from "../../core";
 
-interface Props {
-    organizationName: string;
-    children: React.ReactNode
-}
+interface Props extends RouteComponentProps { }
 
-export const UserProfileContainer: React.FunctionComponent = (props: Props) => {
+const UserProfileContainerInner = (props: Props) => {
 
-    return <UserProfileComponent></UserProfileComponent>;
+    const userId = props.match.params['id'];
+    const [user, setUser] = React.useState(createDefaultUserProfileVm());
+
+    const navigateToOrganization = () => {
+        props.history.push(SwitchRoutes.root);
+    }
+
+    const loadUser = (userId: number) => {
+        //userProfileAPI.geUserProfile(userId).then((res) => setUser(res));
+    }
+
+    React.useEffect(() => {
+        //loadUser(userId);
+    }, [])
+
+    return <UserProfileComponent user={user} navigateTo={navigateToOrganization} />;
 };
+
+export const UserProfileContainer = withRouter(UserProfileContainerInner);
