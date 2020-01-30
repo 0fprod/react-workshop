@@ -16,7 +16,6 @@ export const OrganizationComponent = (props: Props) => {
   return (
     <>
       <SearchInput
-        organization={organization}
         setOrganization={setOrganization}
         loadMembers={loadMembers}
       />

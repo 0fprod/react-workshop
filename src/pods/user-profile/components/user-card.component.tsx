@@ -51,7 +51,7 @@ export const UserCardComponent = (props: Props) => {
         let wordLowercase = word.toLocaleLowerCase();
         let wordUppercase = word.toLocaleUpperCase();
 
-        return wordUppercase[0] + wordLowercase.substr(1, word.length);
+        return wordUppercase[0] + wordLowercase.substring(1);
     }
 
     return (
@@ -80,5 +80,3 @@ export const UserCardComponent = (props: Props) => {
             </Card>
         </>);
 };
-
-//<TextField key={index} label={capitalize(key)} defaultValue={user[key]} 7/>

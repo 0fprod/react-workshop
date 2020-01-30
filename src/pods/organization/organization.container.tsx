@@ -2,35 +2,41 @@ import * as React from "react";
 import { OrganizationComponent } from "./organization.component";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { LinkedRoutes } from "../../core";
-import { MemberVm } from "./member.vm";
 import { memberAPI } from "./member.api";
+import { SessionContext } from "../../core/session-context";
 
 interface Props extends RouteComponentProps {
 }
 
-
 const OrganizationContainerInner = (props: Props) => {
-    const [organization, setOrganization] = React.useState("lemoncode");
-    const [members, setMembers] = React.useState<MemberVm[]>([]);
+
+    const {
+        organization,
+        setOrganization,
+        membersCollection,
+        setMembersCollection
+    } = React.useContext(SessionContext);
 
     const onClickUserProfile = (userId: number) => {
         props.history.push(LinkedRoutes.userProfile(userId));
     }
 
     const loadMembers = (organization: string) => {
-        memberAPI.fetchData(organization).then(members => setMembers(members));
+        memberAPI.fetchData(organization).then(members => setMembersCollection(members));
     };
 
     React.useEffect(() => {
-        loadMembers(organization);
-    },[]);    
+        if (!membersCollection.length) {
+            loadMembers(organization);
+        }
+    }, []);
 
 
     return (<OrganizationComponent
         onClickUserProfile={onClickUserProfile}
         organization={organization}
         setOrganization={setOrganization}
-        members={members}
+        members={membersCollection}
         loadMembers={loadMembers}
     />);
 };
